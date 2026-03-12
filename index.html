@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSphere | Restoring Our Planet</title>
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary-green: #2d6a4f;
+            --secondary-green: #40916c;
+            --accent-blue: #1b4f72;
+            --water-blue: #52b788;
+            --light-bg: #f4f9f4;
+            --text-dark: #1b262c;
+            --text-light: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            position: absolute;
+            width: 100%;
+            z-index: 10;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--water-blue); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--water-blue); }
+
+        .btn-donate {
+            background-color: var(--water-blue);
+            color: var(--text-light);
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn-donate:hover {
+            transform: scale(1.05);
+            background-color: var(--secondary-green);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Parallax effect */
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+            color: var(--text-light);
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            padding: 15px 40px;
+            background-color: var(--text-light);
+            color: var(--primary-green);
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--water-blue);
+            color: var(--text-light);
+        }
+
+        /* --- STATS BAR --- */
+        .stats-bar {
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 10%;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        /* --- CARDS SECTION (Green, Water, Air) --- */
+        .features {
+            padding: 80px 10%;
+            background-color: var(--light-bg);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            background: var(--light-bg);
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .card h3 {
+            margin-bottom: 10px;
+            color: var(--primary-green);
+        }
+
+        .card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* --- SPLIT SECTION (Water Focus) --- */
+        .water-section {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: var(--white);
+        }
+
+        .water-image {
+            flex: 1;
+            min-width: 400px;
+            background: url('https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80') center/cover;
+            min-height: 500px;
+        }
+
+        .water-text {
+            flex: 1;
+            padding: 80px 5%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 400px;
+        }
+
+        .water-text h2 {
+            font-size: 2.5rem;
+            color: var(--accent-blue);
+            margin-bottom: 20px;
+        }
+
+        .water-text p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        .check-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+
+        .check-list li::before {
+            content: '✓';
+            color: var(--water-blue);
+            font-weight: bold;
+        }
+
+        /* --- CTA SECTION --- */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-green), var(--accent-blue));
+            color: var(--text-light);
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative circle */
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .cta-section h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        .btn-white {
+            background-color: var(--text-light);
+            color: var(--primary-green);
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+            display: inline-block;
+        }
+
+        .btn-white:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #111;
+            color: #888;
+            padding: 60px 10% 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--water-blue);
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; } /* Simplified for mobile */
+            .water-section { flex-direction: column; }
+            .water-image { min-height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">Eco<span>Sphere</span></div>
+        <div class="nav-links">
+            <a href="#">Our Mission</a>
+            <a href="#">Projects</a>
+            <a href="#">Water Initiative</a>
+            <a href="#">Blog</a>
+        </div>
+        <a href="#" class="btn-donate">Donate Now</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Protecting the Earth for Future Generations</h1>
+            <p>We are dedicated to preserving our natural resources, cleaning our oceans, and ensuring a sustainable future for all living beings.</p>
+            <a href="#" class="hero-btn">Join the Movement</a>
+        </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stat-item">
+            <span class="stat-number">1.5M+</span>
+            <span class="stat-label">Trees Planted</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Clean Water Wells</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Renewable Energy</span>
+        </div>
+    </section>
+
+    <!-- Features Grid -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Our Pillars of Sustainability</h2>
+            <p>We focus on three critical areas to restore the balance of our planet.</p>
+        </div>
+
+        <div class="cards-container">
+            <!-- Card 1: Green -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Forest" class="card-img">
+                <div class="card-content">
+                    <div class="card-icon">🌿</div>
+                    <h3>Green Reclamation</h3>
+                    <p>Restoring forests and biodiversity. We work with local communities to plant native trees and protect endangered ecosystems.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Water -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Water" class="card-img">
+                <div class="card-content">
+                    <div class="card-icon">💧</div>
+                    <h3>Fresh Water Access</h3>
+                    <p>Providing clean drinking water to remote villages and cleaning up plastic waste from our oceans and rivers.</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Clean Air -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Wind Turbines" class="card-img">
+                <div class="card-content">
+                    <div class="card-icon">💨</div>
+                    <h3>Clean Energy</h3>
+                    <p>Transitioning away from fossil fuels by investing in solar, wind, and hydroelectric power solutions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Split Section: Water Focus -->
+    <section class="water-section">
+        <div class="water-image"></div>
+        <div class="water-text">
+            <h2>The Blue Planet Initiative</h2>
+            <p>Water is life. Yet, millions lack access to clean, safe drinking water. Our initiative focuses on sustainable filtration systems and watershed protection.</p>
+            <ul class="check-list">
+                <li>Building sustainable filtration systems</li>
+                <li>Protecting watersheds from industrial pollution</li>
+                <li>Education on water conservation</li>
+            </ul>
+            <br>
+            <a href="#" class="btn-donate" style="background-color: var(--accent-blue);">Learn More</a>
+        </div>
+    </section>
+
+    <!--
